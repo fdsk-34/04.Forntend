@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>table 태그</title>
+    <style>
+        /* css  블락 */ 
+        table {
+            border-collapse: collapse; /*  셀과 셀사이의 간격을 없앰*/
+        }
+    </style>
+</head>
+<body>
+    <h1> table 태그</h1>
+    <hr>
+    <br>
+    <table border="1" align="center" width="700">
+        <tr align="center" bgcolor="#2f52fc"><td>이름</td><td>주소</td><td>나이</td><td>휴대폰</td></tr>
+        <tr align="center"><td>홍길동</td><td>서울</td><td>30</td><td>010-1111-1111</td></tr>
+        <tr align="center"><td>이순신</td><td>부산</td><td>40</td><td>010-2222-2222</td></tr>
+        <tr align="center"><td>세종대왕</td><td>광주</td><td>50</td><td>010-3333-3333</td></tr>
+    </table>
+
+    <br><br><br><br>
+
+    <table border="1" align="center" width="700">
+        <tr align="center">
+            <td rowspan="4" width="100">(사진)</td>
+            <td rowspan="2" width="100" bgcolor="#d9a5fc">성명</td>
+            <td width="100" bgcolor="#d9a5fc">한글</td>
+            <td width="150">&nbsp;</td>
+            <td width="100" bgcolor="#d9a5fc">생년월일</td>
+            <td> 년&nbsp; 월&nbsp; 일&nbsp; </td>
+        </tr>
+        <tr>
+            <td align="center" bgcolor="#d9a5fc">영문</td>
+            <td></td>
+            <td align="center" bgcolor="#d9a5fc">전화</td>
+            <td></td>
+            
+        </tr>
+        <tr>
+            <td align="center" bgcolor="#d9a5fc">이메일</td>
+            <td colspan="2"></td>
+            <td align="center" bgcolor="#d9a5fc">휴대폰</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td align="center" bgcolor="#d9a5fc">주소</td>
+            <td colspan="4"></td>
+            
+        </tr>
+    </table>
+    <p>
+        <br>
+ <!-- 학력사항-->
+    <table border="1" align="center" width="700">
+        <tr align="center" bgcolor="#d9a5fc"> <td width="200">기간</td><td>출신학교</td><td>전공</td><td width="100">졸업여부</td><td width="50">소재지</td>
+        </tr>
+        <tr>
+            <td align="center"> &nbsp;년 &nbsp; &nbsp;월 &nbsp;- &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;년 &nbsp;&nbsp; 월</td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td align="center"> &nbsp;년 &nbsp; &nbsp;월 &nbsp;- &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;년 &nbsp;&nbsp; 월<td></td><td></td><td></td><td></td>
+        </tr>
+    </table>
+    <br>
+
+ <!-- 활동사항 / 수상 내역-->
+    <table border="1" align="center" width="700">
+        <tr align="center" bgcolor="#d9a5fc">
+            <td>기간</td><td>활동내용</td><td>활동구분</td><td>기관 및 장소</td>
+        </tr>
+        <tr>
+            <td align="center"> &nbsp;년 &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;월&nbsp; &nbsp; - &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;년 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 월</td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td align="center"> &nbsp;년 &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;월&nbsp; &nbsp; - &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;년 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 월</td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td align="center"> &nbsp;년 &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;월&nbsp; &nbsp; - &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;년 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 월</td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td align="center" rowspan="3" bgcolor="#d9a5fc">수상내역</td><td align="center" bgcolor="#d9a5fc" colspan="2">내용</td><td align="center" bgcolor="#d9a5fc">기관</td>
+        </tr>
+        <tr>
+            <td colspan="2">&nbsp;</td><td></td>
+        </tr>
+            <tr>
+                <td colspan="2">&nbsp;</td><td></td>
+            </tr>
+    </table>
+    <br>
+    <!-- 자격취득내역-->
+     <table border="1" align="center" width="700">
+        <tr align="center" bgcolor="#d9a5fc">
+            <td>자격증명</td><td>시험기관</td><td>취득년월</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td><td></td><td></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td><td></td><td></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td><td></td><td></td>
+        </tr>
+     </table>
+    
+     <!--특이사항-->
+     <table border="1" align="center" width="700">
+        <tr>
+            <td align="center" bgcolor="#d9a5fc">취미</td><td align="center" bgcolor="#d9a5fc">특기</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td><td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td><td></td>
+        </tr>
+        <br>
+      </table>
+</body>
+</html>
