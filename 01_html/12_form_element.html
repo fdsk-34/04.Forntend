@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <title>form 태그</title>
+       <style>
+        .warp{
+            margin:0 auto;
+            width: 80%;
+        }
+       </style>
+</head>
+<body>
+    <div class="wrap">
+        <h1> 폼(form태그) </h1>
+        <!-- 폼태그는 클라이언트와 서버 사이에 통신할 때 쓰는 태그입니다
+         - 클라이언트의 데이터를 서버로 전송 할때  사용하는 태그, 
+         - 로그인(id,password,주소)
+         - 회원가입 id, password, 주소, 이미지, 하고 싶은 말
+        
+            action : 서버에서 처리할 페이지
+            method : 서버로 전송하는 방식 , 클라이언트의 데이터를 서버로 전송하는 방식
+            get : 클라이언트의 데이터를 url 뒤에 넣어서 서버로 전송
+                 255 byte 까지만 전송됨, 보안에 취약
+            post :http 헤더 앞에서 데이터를 전송 , url에 출력되지 않는다. 그래서 보안이 강하다
+            무제한 데이터를 전송-->
+         <hr>
+        <h2> 회원가입 양식 </h2>
+        <p />
+        <form action="#" method="get">
+
+            <table>
+                <tr><td>아이디 : </td><td><input type="text" placeholder="아이디를 입력해주세요"></td></tr>
+                <tr><td>패스워드 : </td><td><input type="password"placeholder="비밀번호를 입력해주세요"></td></tr>
+                <tr><td>패스워드 확인 :</td><td><input type="password"placeholder="비밀번호를 확인해주세요"></td></tr>
+                <tr><td>이메일 : </td><td><input type="email"placeholder="이메일을 입력해주세요"></td></tr>
+                <tr><td>전화번호 :  </td><td><input type="tel"placeholder="전화번호를 입력해주세요"></td></tr>
+                <tr><td>성별 :  </td><td>
+                    <select>
+                        <option value="man">남자</option>
+              
+                        <option value="woman">여자</option>
+                        <option value="unkown">비공개</option>
+                    </select>
+                    </td></tr>
+                    <tr><td>생년월일 : </td><td><input type="date"></td></tr>
+                    <tr><td>자기소개 : </td><td>
+                        <textarea rows="30" cols="300" placeholder="자기소개를 입력해주세요"></textarea>
+                    </td></tr>
+            </table>
+        </form>
+    </div>
+</body>
+</html>
