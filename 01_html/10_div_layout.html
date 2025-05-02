@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>div layout 구성</title>
+    <style>
+        div {border: 1px solid red;
+        .warp{margin : 0 auto ;
+            width: 80%;}
+        }
+        .header{height: 100px ;}
+        .main {height : 500px;}
+        .footer{height : 100px;}
+    </style>
+</head>
+<body>
+    <!-- div로 레이아웃을 설정하는 방식은 옛날 방식-->
+     <!-- html5에서 시멘트릭 태그를 사용해서 레이아웃을 설정한다 가독성, 구글검색엔진 쉽게 사이트를 분석해서 정보출력 가능-->
+    <div class = "wrap">
+        <div class="header">헤더 블락</div>
+        <div class="main">메인 블락</div>
+        <div class="footer">푸더 블락</div>
+    </div>
+</body>
+</html>
