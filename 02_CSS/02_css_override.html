@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>css 중복 적용된 경우 우선 순위</title>
+</head>
+<style>
+    p {
+        color:blue !important;
+    }
+</style>
+<link rel="stylesheet" href="./css/02_css_orver.css">
+<body>
+    <!-- css 중복 적용된 경우 우선순위
+     css는 기본 적으로 스타일이 부모에서부터 상속 ,누적되어 적용된다.
+     중복 항목이 있는  경우 아래 순서로 우선순위가 적용된다.
+
+    0. !import 
+    1. 인라인 스타일 
+     2. 내부 스타일
+     3. 외부 스타일
+     4.  기본 브라우저 스타일-->
+
+     <p style="color:red; "> css가 중복 적용된 경우 어떤 것이 적용 될까? 
+        
+     </p>
+</body>
+</html>
