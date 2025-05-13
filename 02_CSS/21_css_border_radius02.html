@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>border-radius 블락  float, box-shadow</title>
+    <style>
+        ul {
+            list-style:none;  /*  동그라미를 없앰*/
+           /* border : 1px red;*/
+            width : 80%;
+            margin:0 auto;
+        }
+        li{
+            border:1px solid red;
+            width: 100px;
+            float:left;
+            margin:30px ;
+            border-radius:10px;
+            text-align:center;
+            background-color:blueviolet;
+            color:white;
+            font-weight: bold;
+            box-shadow: 5px 5px 20px rgb(233, 136, 14);
+        }
+        li:hover {
+            background-color:rgb(4, 0, 255);
+            box-shadow: 5px 5px 10px rgb(239, 6, 6);
+        }
+    </style>
+</head>
+<body>
+    <!-- emet : ul.wrap>li.d1{$}*5
+     ul 태그도 블락 li 태그도 불락
+     -->
+    
+    <ul class="wrap">
+        <li class="d1">버튼1</li>
+        <li class="d1">버튼2</li>
+        <li class="d1">버튼3</li>
+        <li class="d1">버튼4</li>
+        <li class="d1">버튼5</li>
+    </ul>
+
+
+</body>
+</html>
