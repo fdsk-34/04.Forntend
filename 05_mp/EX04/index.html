@@ -7,9 +7,16 @@
     <title>인터넷 홈페이지</title>
     <style>
         .title {
-            width: 1000px;
+            width: 80%;
             margin: 0 auto;
 
+        }
+
+        .d1 {
+        
+            margin:0 auto;
+            float: left;
+             text-align: right;
         }
 
         .log {
@@ -27,39 +34,54 @@
 
         }
 
+        .main {
+            float: left;
+        }
+
         .banner {
             width: 1000px;
+            margin: 0 auto;
             padding-left: 0%;
             padding-right: 0%;
+            text-align: center;
 
         }
 
-        .logo {
-            width: 1000px;
-            margin: auto;
-
+        .banner-box {
+            float: left;
+            margin: 0 5px;
         }
+
+        
 
         .notice {
-            width: 1000px;
+            
             margin: 0 auto;
             float: left;
+            
+        }
+
+        .clear {
+            clear: both;
         }
     </style>
 </head>
 
 <body>
 
-    <div class="title">
-        <div>
+    <header class="title">
+        <div class="top">
             <img src="/05_mp/EX04/img/logo.gif">&nbsp; &nbsp;
             <img src="/05_mp/EX04/img/moto.gif">
-
-            <h4 class="log">로그인 | 회원 가입 | 사이트맵 | 회사 소개 </h>
         </div>
+        <nav class="log">
+            로그인 | 회원 가입 | 사이트맵 | 회사 소개
+        </nav>
+    </header>
 
-        <br>
-        <hr><br>
+    <br>
+    <hr><br>
+    <main>
         <div class="memu01">
             <img src="/05_mp/EX04/img/menu01.gif">
             <img src="/05_mp/EX04/img/menu02.gif">
@@ -68,92 +90,101 @@
             <img src="/05_mp/EX04/img/menu05.gif">
 
             <div class="banner">
-                <img src="/05_mp/EX04/img/banner01.gif">
-                <img src="/05_mp/EX04/img/banner_bar.gif">
-
-                <img src="/05_mp/EX04/img/banner02.gif">
-                <img src="/05_mp/EX04/img/banner_bar.gif">
-
-                <img src="/05_mp/EX04/img/banner03.gif">
-                <img src="/05_mp/EX04/img/banner_bar.gif">
+                <div class="banner-box">
+                    <img src="/05_mp/EX04/img/banner01.gif">
+                    <img src="/05_mp/EX04/img/banner_bar.gif">
+                </div>
+                <div class="banner-box">
+                    <img src="/05_mp/EX04/img/banner02.gif">
+                    <img src="/05_mp/EX04/img/banner_bar.gif">
+                </div>
+                <div class="banner-box">
+                    <img src="/05_mp/EX04/img/banner03.gif">
+                    <img src="/05_mp/EX04/img/banner_bar.gif">
+                </div>
             </div>
         </div>
-        <div>
-            <div>
+        <div class="clear"></div>
+        <section class="info-row">
+            <div class="d1 customer">
                 <img src="/05_mp/EX04/img/customer.gif">
 
                 <img src="img/more.gif">
             </div>
+            <div class="d1 notice2">
+                <img src="/05_mp/EX04/img/notice.gif"> <br>
+                <ul>
+                    <li> 새로운 상품의 출시를 알려드립니다 &nbsp; 2024-03-03 </li>
+                    <li> 새로운 상품의 출시를 알려드립니다 &nbsp; 2024-03-03 </li>
+                    <li> 새로운 상품의 출시를 알려드립니다 &nbsp; 2024-03-03 </li>
+                    <li> 새로운 상품의 출시를 알려드립니다 &nbsp; 2024-03-03 </li>
+                </ul>
+            </div>
+            <div class="d1">
+                <img src="/05_mp/EX04/img/banner_faq.gif">
+            </div>
+        </section>
         </div>
-        <div>
-            <img src="/05_mp/EX04/img/notice.gif"> <br>
+        <div class="clear"></div>
 
-            새로운 상품의 출시를 알려드립니다 &nbsp; 2024-03-03 <br>
-            새로운 상품의 출시를 알려드립니다 &nbsp; 2024-03-03 <br>
-            새로운 상품의 출시를 알려드립니다 &nbsp; 2024-03-03 <br>
-            새로운 상품의 출시를 알려드립니다 &nbsp; 2024-03-03 <br>
-        </div>
-    </div>
-    <div>
-        <img src="/05_mp/EX04/img/banner_faq.gif">
-    </div>
-    <div class="notice">
-        <h> 손해보험 상식</h> <br>
-        <img src="/05_mp/EX04/img/blue_dot.gif">손해보험이란?<br>
-        <img src="/05_mp/EX04/img/blue_dot.gif">나에게 필요한 보험은 ?<br>
-        <img src="/05_mp/EX04/img/blue_dot.gif">보험 약관의 중요성 <br>
-        <img src="/05_mp/EX04/img/blue_dot.gif">손해 보험의 특징 <br>
+        <div class="notice">
+            <h3> 손해보험 상식</h3> <br>
+            <img src="/05_mp/EX04/img/blue_dot.gif">손해보험이란?<br>
+            <img src="/05_mp/EX04/img/blue_dot.gif">나에게 필요한 보험은 ?<br>
+            <img src="/05_mp/EX04/img/blue_dot.gif">보험 약관의 중요성 <br>
+            <img src="/05_mp/EX04/img/blue_dot.gif">손해 보험의 특징 <br>
 
-        <div>
-            <h> 루바토 보험의 장점</h> <br>
-            <img src="/05_mp/EX04/img/blue_dot.gif">보험료 저렴<br>
-            <img src="/05_mp/EX04/img/blue_dot.gif">신속한 처리 및 보상<br>
-            <img src="/05_mp/EX04/img/blue_dot.gif">만기 시 원리금 보장<br>
+            <div>
+                <h3> 루바토 보험의 장점</h3> <br>
+                <img src="/05_mp/EX04/img/blue_dot.gif">보험료 저렴<br>
+                <img src="/05_mp/EX04/img/blue_dot.gif">신속한 처리 및 보상<br>
+                <img src="/05_mp/EX04/img/blue_dot.gif">만기 시 원리금 보장<br>
 
+            </div>
+            <div>
+                <h3> 고객센터</h3> <br>
+                <img src="/05_mp/EX04/img/blue_dot.gif">전국 지점 안내<br>
+                <img src="/05_mp/EX04/img/blue_dot.gif">손해배상 안내<br>
+                <img src="/05_mp/EX04/img/blue_dot.gif">손해보험 FAQ<br>
+                <img src="/05_mp/EX04/img/blue_dot.gif">질문과 답변 <br>
+            </div>
+            <div>
+                <h3> 마이 페이지</h3> <br>
+                <img src="/05_mp/EX04/img/blue_dot.gif">계약 조회/변경<br>
+                <img src="/05_mp/EX04/img/blue_dot.gif">보험 계약 갱신<br>
+                <img src="/05_mp/EX04/img/blue_dot.gif">보험료 납입<br>
+                <img src="/05_mp/EX04/img/blue_dot.gif">증명서 발급<br>
+            </div>
+            <div>
+                <h3> 가입 안내</h3> <br>
+                <img src="/05_mp/EX04/img/blue_dot.gif">공인인증센터<br>
+                <img src="/05_mp/EX04/img/blue_dot.gif">인증서 발급/갱신<br>
+                <img src="/05_mp/EX04/img/blue_dot.gif">인증서 폐기<br>
+                <img src="/05_mp/EX04/img/blue_dot.gif">웹 로그인<br>
+            </div>
+            <div>
+                <h3> 회사 소개</h3> <br>
+                <img src="/05_mp/EX04/img/blue_dot.gif">가입 소개<br>
+                <img src="/05_mp/EX04/img/blue_dot.gif">찾아 오시는 길<br>
+            </div>
         </div>
-        <div>
-            <h> 고객센터</h> <br>
-            <img src="/05_mp/EX04/img/blue_dot.gif">전국 지점 안내<br>
-            <img src="/05_mp/EX04/img/blue_dot.gif">손해배상 안내<br>
-            <img src="/05_mp/EX04/img/blue_dot.gif">손해보험 FAQ<br>
-            <img src="/05_mp/EX04/img/blue_dot.gif">질문과 답변 <br>
-        </div>
-        <div>
-            <h> 마이 페이지</h> <br>
-            <img src="/05_mp/EX04/img/blue_dot.gif">계약 조회/변경<br>
-            <img src="/05_mp/EX04/img/blue_dot.gif">보험 계약 갱신<br>
-            <img src="/05_mp/EX04/img/blue_dot.gif">보험료 납입<br>
-            <img src="/05_mp/EX04/img/blue_dot.gif">증명서 발급<br>
-        </div>
-        <div>
-            <h> 가입 안내</h> <br>
-            <img src="/05_mp/EX04/img/blue_dot.gif">공인인증센터<br>
-            <img src="/05_mp/EX04/img/blue_dot.gif">인증서 발급/갱신<br>
-            <img src="/05_mp/EX04/img/blue_dot.gif">인증서 폐기<br>
-            <img src="/05_mp/EX04/img/blue_dot.gif">웹 로그인<br>
-        </div>
-
-        <h> 회사 소개</h> <br>
-        <img src="/05_mp/EX04/img/blue_dot.gif">가입 소개<br>
-        <img src="/05_mp/EX04/img/blue_dot.gif">찾아 오시는 길<br>
-
-    </div>
-    </div>
-    <p>
+    </main>
+    <footer>
         <hr>
-    <div>
-        <h>개인정보 취급방침 | 이용 안내 | 이메일 무단수집 거부</h><br>
-        <h>서민금융119서비스 | 보험범죄 신고 | 전자 민원 접수 | 보험약관 안내 | 금융사기신고센터</h><br>
-        고객센터 <img src="/05_mp/EX04/img/customer_phone.gif">
-        <img src="/05_mp/EX04/img/f.gif">
-        <img src="/05_mp/EX04/img/b.gif">
-        <img src="/05_mp/EX04/img/t.gif">
-    </div>
-    <footer class="logo">
-        <img src="/05_mp/EX04/img/address.gif">
+        <div>
+            <p>개인정보 취급방침 | 이용 안내 | 이메일 무단수집 거부</p>
+            <p>서민금융119서비스 | 보험범죄 신고 | 전자 민원 접수 | 보험약관 안내 | 금융사기신고센터</p>
+            고객센터 <img src="/05_mp/EX04/img/customer_phone.gif">
+            <img src="/05_mp/EX04/img/f.gif">
+            <img src="/05_mp/EX04/img/b.gif">
+            <img src="/05_mp/EX04/img/t.gif">
+        </div>
+        <div class="logo">
+            <img src="/05_mp/EX04/img/address.gif">
+        </div>
     </footer>
 
 
 </body>
 
-</html>-
+</html>

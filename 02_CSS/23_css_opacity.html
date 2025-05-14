@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>opacity</title>
+    <style>
+        .pic1 {
+            opacity:0.5;
+            box-shadow:5px 5px 20px black;
+             }
+
+    .d1{ 
+        background-color:gray;
+    }         
+    div {
+        /* display 속성 : 
+                block : width 100%, margin , padding, height 조정 할 수 있다. 엔터가 들어가 있다
+                inline : margin-top, bottem, height이 조정안됨. width 컨텐츠 크기만큼 정의 ,엔터가 들어가 있지 않다. 
+                inline-block : 엔터가 없다. width, height,margin, padding 조정가능.
+
+         */
+        display :inline-block;
+        border : 1px solid red;
+        margin: 20px;
+    }
+        .pic1:hover {
+            opacity:0.9;
+            box-shadow:10px 10px 10px black;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Opacity 속성  :  그림의 투명도를 정의 (1.0은 완전 불투명 ~0.0은 완전 투명)
+     -->
+
+    <div class="d1">
+        <img class="pic1" src="./img/pic1.jpg" alt="펭귄 그림입니다">
+    </div>
+    <div class="d1">
+        <img class="pic1" src="./img/pic1.jpg" alt="펭귄 그림입니다">
+    </div>
+    <div class="d1">
+        <img class="pic1" src="./img/pic1.jpg" alt="펭귄 그림입니다">
+    </div>
+    <div class="d1">
+        <img class="pic1" src="./img/pic1.jpg" alt="펭귄 그림입니다">
+    </div>
+</body>
+
+</html>

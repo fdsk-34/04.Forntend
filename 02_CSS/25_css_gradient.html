@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gradient</title>
+    <Style>
+        #grad1,
+        #grad2,
+        #grad1-1,
+        #grad1-2 {
+            height: 50px;
+            border: 1px solid red;
+        }
+
+        #grad1 {
+            /* 선형 그라디언트 
+            to right, to left, to top, to bottom
+            */
+            background: linear-gradient(to right, yellow, red);
+
+        }
+
+        #grad1-1 {
+            background: linear-gradient(to left, green, red, yellow, black, brown)
+        }
+
+        #grad1-2 {
+            background: linear-gradient(45deg, yellow, red);
+            height: 200px;
+        }
+
+        #grad2 {
+            /* 원형 그라디언트 */
+            width: 200px;
+            height: 200px;
+
+            background: radial-gradient(red, yellow, green, brown);
+        }
+
+        #grad_buttn {
+            border: 1px solid red;
+            width: 80px;
+            text-align: center;
+            background: linear-gradient(to right, red, yellow);
+            box-shadow:5px 5px 5px black;
+            color:black;
+            font-size: 20px;
+            font-weight: bolder;
+        }
+        #grad_buttn:hover{
+            box-shadow:10px 10px 3px black;
+            
+        }
+    </Style>
+</head>
+
+<body>
+    <!-- 그레디언트 : 색깔을 노란색에서 빨간색으로 점점 변화 되도록 하는 효과
+        선형 :  선을 기준으로 점점 변화 되도록 효과를 주는 것
+        원형 : 원형을 기준으로 점점 변 화를 줌.    
+    -->
+    <h2> 선형 그라디언트</h2>
+    <div id="grad1"></div>
+    <div id="grad1-1"></div>
+    <div id="grad1-2"></div>
+
+    <h2> 원형 그라디언트</h2>
+    <div id="grad2"></div>
+
+    <h2>그라디언트 버튼</h2>
+    <div id="grad_buttn">버튼 클릭</div>
+</body>
+
+</html>
