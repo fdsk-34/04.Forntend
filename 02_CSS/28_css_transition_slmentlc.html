@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>transition4 timing function</title>
+    <style>
+        div{
+            width:100px;
+            height:50px;
+            background-color:red;
+            color:yellow;
+            border:1px solid black;
+            transition:width 1s,font-weight 1s,padding-left 1s;
+            align-content: center;
+            padding-left:10px;
+ 
+        }
+        .div1{transition-timing-function: linear;}
+        .div2{transition-timing-function: ease;}
+        .div3{transition-timing-function: ease-in;}
+        .div4{transition-timing-function: ease-out;}
+        .div5{transition-timing-function: ease-in-out;}
+        .div6{transition-timing-function: cubic-bezier(0.1,0.0,0.1,1.0);}
+       
+        div:hover{
+            width:200px;
+            font-weight: bold;
+            padding-left:60px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 
+        transition-timing-function
+                linear
+                ease
+                ease-in
+                ease-out
+                cubic-bezier
+    
+    -->
+    <!-- emet              
+div.div.div{$}*6
+-->
+    <div class="div1">linear</div>
+    <div class="div2">ease</div>
+    <div class="div3">ease-in</div>
+    <div class="div4">ease-out</div>
+    <div class="div5">ease-in-out</div>
+    <div class="div6">cubic-bezier</div>
+
+
+
+</body>
+
+</html>
