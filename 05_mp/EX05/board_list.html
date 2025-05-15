@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>list</title>
+    <style>
+        .wrap {
+            width: 1000px;
+            height:800px;
+            margin: 0 auto;
+        }
+
+        #head {
+            width: 1000px;
+
+            float: left;
+            border: 1px solid red;
+        }
+        #login-box{
+            width:100%;
+            
+            background-color:#559512;
+            border:1px solid white;
+            border-radius: 10px;
+            margin-bottom:20px;
+            
+            
+            text-align:center;            
+        }
+        .login-title{
+            width: 100%;
+            height: auto;
+            margin-bottom:10px;
+        }
+        #aside {
+            width: 200px;
+            height: 500px;
+            min-height:500px;
+            background-image: url('./img/sub_menu_bg.png');
+            background-size:auto;
+            background-repeat: no-repeat;
+            background-position: bottom center;
+            padding: 0;
+            box-sizing: border-box;
+            color: black;
+            border: 1px solid red;
+            font-family: sans-serif;
+            text-align: center;
+
+            display:flex;
+            flex-direction: column;
+            align-items:center;
+            justify-content:flex-start;
+
+
+        }
+        #login-box input[type="text"],
+        #login-box input[type="password"]{
+            width:90%;
+            padding:5px;
+            margin-bottom:10px;
+        }
+        #login-box button {
+            width:95%;
+            padding:5px;
+            background-color: #7fb700;
+            color:white;
+            border:none;
+            font-size:14px;
+        }
+        .login-links{
+            font-size:12px;
+        }
+
+        #aside ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            width:100%;
+        }
+
+        #aside li {
+            height:40px;
+            line-height:50px;
+            margin:0;
+            
+            font-size: 14px;
+            font-weight: bold;
+            text-shadow: 1px 1px 1px black;
+            text-align:center;
+        }
+
+        .memubar {
+            width: 1000px;
+            height: 50px;
+
+            background-image: url('./img/main_menu_bg.png');
+            background-size: cover;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            text-shadow: 1px 1px 1px black;
+            font-family: sans-serif;
+            border: 1px solid red;
+
+        }
+
+        #cummuntiy {
+            width: 180px;
+            height: 200px;
+            margin-top: 200px;
+            margin-left: 30px;
+
+            background-color: beige;
+            border: 1px solid red;
+            border-radius: 50px;
+            text-align: center;
+
+        }
+
+        #address {
+            margin-top: -70px;
+            padding-right: 300px;
+            float: right;
+        }
+
+        .clear {
+            clear: both
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div id="head">
+            <div><img src="./img/logo.png" alt="로고">
+                <h4 align="right">HOME | LOGIN | JOIN | NOTICE</h4>
+                <div class="memubar">
+
+                    <div>자유 게시판</div>
+                    <div> 기타 연주</div>
+                    <div>공동 구매 </div>
+                    <div>연주회 안내 </div>
+                    <div>회원 게시판</div>
+                </div>
+            </div>
+
+
+            <div id="aside">
+                <div id="login-box">
+                    <img src="./img/ttl_login.png" alt="멤버 로그인" class="login-title">
+                    <form>
+                        <input type="text" placeholder="아이디" name="userid"><br>
+                        <input type="password" placeholder="패스워드" name="password"><br>
+                        <button type="submit">로그인</button>
+                    </form>
+                    <div class="login-links">
+                        <a href="#">회원가입</a> | <a herf="#">아이디/비밀번호 찾기</a>
+                    </div>
+                </div>
+                <ul>
+                    <li>자유 게시판</li>
+                    <li>방명록</li>
+                    <li>공지사항</li>
+                    <li>등업 요청</li>
+                    <li>포토 갤러리</li>
+                </ul>
+            </div>
+        </div>
+
+
+</body>
+
+</html>
