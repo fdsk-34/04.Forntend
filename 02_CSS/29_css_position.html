@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .div {
+            width:100px;
+            height:100px;
+            border:1px solid red;
+            margin : 30px;
+
+
+        }
+        .d1{background-color:darkgreen; }
+        .d2{background-color:gold; position: relative; left:30px; top:50px;}
+        .d3{background-color:cornflowerblue;}
+        .d4{background-color:hotpink; position: absolute; left:30px; top:50px;}
+        .d5{background-color:magenta;}
+        .d6{background-color:aqua; position: fixed; right: 30px; bottom:30px;}
+        
+    </style>
+</head>
+<body>
+    <!--
+         position 속성 : 박스위치를 정의 하는 속성
+         값     static  : 자신의 위치를 기준ㄴ으로 이동
+                relative : 부모가 position 설정이 되지 않았을때 자신의 위치를 기준으로 
+                 상대 위치 결정정
+                absolute : 절대 위치설정 왼쪽 최상단을 기준으로 위치이동, 이동후 자신의 자리가 없어짐
+                부모를 기준으로 이동 이동후 자리 없어짐
+                모달창을 출력할때 사용, 다른 코드에 영향주지 않고 작동동
+                fixed :  고정위치 스크롤과 상관없이 위치가 항상 고정되어 있음
+                stycky : 
+
+                div.div.d${$}*5     <-- emet
+    -->
+
+    <h1> position style</h1>
+    <div class="div d1">1</div>
+    <div class="div d2">2</div>
+    <div class="div d3">3</div>
+    <div class="div d4">4</div>
+    <div class="div d5">5</div>
+    <div class="div d-1">5-1</div>
+    
+    <div class="div d6">6</div>
+
+        <div class="div"style="height:3000px;"></div>
+</body>
+</html>
