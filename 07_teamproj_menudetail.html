@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>커피 상세 메뉴 | 수제커피브루</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Noto Sans KR', sans-serif;
+      background-color: #fdfcf7;
+      color: #333;
+    }
+
+    header {
+            background-color: #2d4739;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+    footer {
+      background-color: #2d4739;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    h2.section-title {
+      color: #2d4739;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .menu-detail {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 40px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      padding: 20px;
+      flex-wrap: wrap;
+    }
+
+    .menu-detail img {
+      width: 250px;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 10px;
+      flex-shrink: 0;
+    }
+
+    .menu-info {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .menu-info h3 {
+      margin-top: 0;
+      color: #2d4739;
+    }
+
+    .menu-info p {
+      margin: 5px 0;
+      line-height: 1.5;
+    }
+
+    .menu-info .price {
+      font-weight: bold;
+      color: #e67e22;
+      margin-top: 10px;
+    }
+
+    .back-button {
+      display: block;
+      margin: 40px auto;
+      width: 200px;
+      text-align: center;
+      padding: 10px 20px;
+      background-color: #2d4739;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>수제커피브루</h1>
+  <nav>
+    <a href="index.html">홈</a>
+    <a href="menu.html">메뉴</a>
+    <a href="#">매장 찾기</a>
+    <a href="#">배송현황</a>
+    <a href="#">문의</a>
+  </nav>
+</header>
+
+<div class="container">
+  <h2 class="section-title">상세 메뉴 설명</h2>
+
+  <div class="menu-detail">
+    <img src="./02_CSS/img/bg_tree.png" alt="브루드 아메리카노">
+    <div class="menu-info">
+      <h3>브루드 아메리카노</h3>
+      <p>진한 풍미의 수제 드립 아메리카노. 깔끔한 바디감과 산뜻한 끝맛.</p>
+      <p><strong>원재료:</strong> 아라비카 원두 100%</p>
+      <p><strong>용량:</strong> 355ml</p>
+      <p><strong>카페인:</strong> 150mg</p>
+      <p class="price">₩4,000</p>
+    </div>
+  </div>
+
+  <div class="menu-detail">
+    <img src="./02_CSS/img/bg_tree.png" alt="핸드드립 콜드브루">
+    <div class="menu-info">
+      <h3>핸드드립 콜드브루</h3>
+      <p>부드럽고 청량한 콜드브루. 핸드드립 방식으로 깔끔하게 추출.</p>
+      <p><strong>원재료:</strong> 싱글오리진 원두, 정제수</p>
+      <p><strong>용량:</strong> 355ml</p>
+      <p><strong>카페인:</strong> 120mg</p>
+      <p class="price">₩4,500</p>
+    </div>
+  </div>
+
+  <div class="menu-detail">
+    <img src="./02_CSS/img/bg_tree.png" alt="시그니처 라떼">
+    <div class="menu-info">
+      <h3>시그니처 라떼</h3>
+      <p>고소하고 부드러운 라떼. 수제 시럽과 깊은 풍미의 조화.</p>
+      <p><strong>원재료:</strong> 원두 추출액, 우유, 수제 시럽</p>
+      <p><strong>용량:</strong> 400ml</p>
+      <p><strong>카페인:</strong> 100mg</p>
+      <p class="price">₩5,000</p>
+    </div>
+  </div>
+
+  <div class="menu-detail">
+    <img src="./02_CSS/img/bg_tree.png" alt="밀크 라떼">
+    <div class="menu-info">
+      <h3>밀크 라떼</h3>
+      <p>우유가 좀 더 가미된 라떼. 달달한 시럽과 깊은 우유의 조화.</p>
+      <p><strong>원재료:</strong> 원두 추출액, 우유, 수제 시럽</p>
+      <p><strong>용량:</strong> 500ml</p>
+      <p><strong>카페인:</strong> 90mg</p>
+      <p class="price">₩6,000</p>
+    </div>
+  </div>
+
+  <div class="menu-detail">
+    <img src="./02_CSS/img/bg_tree.png" alt="에스프레쏘">
+    <div class="menu-info">
+      <h3>에스프레쏘</h3>
+      <p>진하고 강렬한 커피 본연의 맛. 원두의 쓴맛과 깊은 풍미의 조화.</p>
+      <p><strong>원재료:</strong> 원두 추출액, 정제수</p>
+      <p><strong>용량:</strong> 400ml</p>
+      <p><strong>카페인:</strong> 200mg</p>
+      <p class="price">₩6,000</p>
+    </div>
+  </div>
+</div>
+
+
+<a href="menu.html" class="back-button">← 메뉴로 돌아가기</a>
+
+<footer>
+  &copy; 2025 수제커피브루 | 경기도 커피시 향기구 아라비카로 100
+</footer>
+
+</body>
+</html>
