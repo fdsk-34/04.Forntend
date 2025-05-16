@@ -29,7 +29,7 @@
         }
 
         .hero {
-            background: url('./img/coffee_hero.jpg') center/cover no-repeat;
+            background: url('#' alt="핸드드립 커피 제조 이미지") center/cover no-repeat;
             height: 400px;
             color: white;
             display: flex;
@@ -56,6 +56,8 @@
         }
 
         .brand-info {
+            color: rgb(45, 71, 57);
+            flex: 1;
             background-color: #eaf1e4;
             padding: 20px;
             border-radius: 10px;
@@ -63,30 +65,28 @@
 
         .menu-section {
             width: 100px;
+            flex: 1;
             color: rgb(45, 71, 57);
             background-color: rgb(234, 241, 228);
             border: 1px solid yellow;
             padding: 10px;
             border-radius: 10px;
             display: flex;
-            flex-direction
-        }
 
-        .hot-memu {
-            width: 200px;
-            height: 150px;
-            display: flex;
-            border: 1px solid rgb(234, 241, 228);
-            margin-left: 20px;
-            margin-bottom: 5px;
-            padding: 5px;
-            border: 1px solid red;
-        }
-
-        .best-memu {
-            margin
-        }
-
+        } 
+        .menu-list{
+            border:1px dashed darkgreen;
+            float:left;
+            
+        }      
+       .hot-menu{
+        margin-left:0 auto;
+        color:cornflowerblue;
+       }
+       .best-menu{
+        margin:0 auto;
+        color:red;
+       }
         footer {
             background-color: #2d4739;
             color: white;
@@ -117,31 +117,34 @@
     <div class="content-section">
         <div class="brand-info">
             <h2>브랜드 이야기</h2>
-            <p>
+
             <h5>신선한 원두와 정성스러운 핸드드립으로 만든 커피. 수제커피브루는 자연에서 온 맛을 전합니다.</h5>
-            </p>
+
         </div>
         <div class="menu-section">
             <h2>인기 메뉴</h2>
-            <ul>
-                <div class="hot-memu"><img src="./02_CSS/img/bg_tree.png"></div>
-                <li class="best-memu">브루드 아메리카노</li>
-                <div class="hot-memu"><img src="./02_CSS/img/bg_tree.png"></div>
-                <li class="best-memu">핸드드립 콜드브루</li>
-                <div class="hot-memu"><img src="./02_CSS/img/bg_tree.png"></div>
-                <li class="best-memu">시그니처 라떼</li>
-            </ul>
-            <ul>
-                <div class="hot-memu"><img src="./02_CSS/img/bg_tree.png"></div>
-                <li class="best-memu">브루드 아메리카노</li>
-                <div class="hot-memu"><img src="./02_CSS/img/bg_tree.png"></div>
-                <li class="best-memu">핸드드립 콜드브루</li>
-                <div class="hot-memu"><img src="./02_CSS/img/bg_tree.png"></div>
-                <li class="best-memu">시그니처 라떼</li>
-            </ul>
+            <div class="menu-list">
+                <div>
+                <img src="./02_CSS/img/bg_tree.png">
+                <span class="hot-menu">브루드 아메리카노</span>
+                <img src="./02_CSS/img/bg_tree.png">
+                <span class="hot-menu">핸드드립 콜드브루</span>
+                <img src="./02_CSS/img/bg_tree.png">
+                <span class="hot-menu">시그니처 라떼</span>
+                </div>
+                
+                <img src="./02_CSS/img/bg_tree.png">
+                <span class="best-menu">브루드 아메리카노</span>
+                <img src="./02_CSS/img/bg_tree.png">
+                <span class="best-menu">핸드드립 콜드브루</span>
+                <img src="./02_CSS/img/bg_tree.png">
+                <span class="best-menu">시그니처 라떼</span>
+            </div>
+            
+            
         </div>
     </div>
-    
+
 
     <footer>
         &copy; 2025 수제커피브루 | 경기도 커피시 향기구 아라비카로 100
