@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width:100px;
+            height:100px;
+            background-color: red;
+               position:relative; /* 자신의 원래 위치에서 이동 , 자신의 위치가 남아있음*/
+                animation: boxmove 5s linear infinite alternate;
+        }
+        @keyframes boxmove{ 
+            from{left:0px;}/*키프레임의 시작*/ /*키프레임의 마지막*/
+              to {left:300px;} 
+            }        
+                      
+            
+           
+        
+    </style>
+</head>
+<body>
+    <div> 애니메이션 박스</div>
+    <p> <strong>참고 : </strong>인터넷 익스플로러 9 이하 버전에서는 작동이 안됩니다. </p>
+
+</body>
+</html>

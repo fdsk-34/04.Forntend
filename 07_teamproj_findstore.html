@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>매장 검색 및 주소 찾기</title>
+    <link rel="stylesheet" herf="style.css">
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&language=ko"></script>
+    <!-- 구글 맵 api 스크립트 호출 데이터-->
+    <style>
+        /*구글 프론트엔드 과정 요약
+         1 initMap(): 구글 맵 초기화
+         2.검색버튼 클릭시  텍스트 값으로 장소 검색
+         3 결과를 displayStores로 리스트와 마커에 렌더링
+         4 리스트 클릭 시 지도 중심 이동 */
+
+        body {
+            margin: 0;
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #fdfcf7;
+            color: #333;
+
+        }
+
+        header {
+            background-color: #2d4739;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+
+        .container {
+            margin-left: 70px;
+            margin-top: 70px;
+        }
+
+        .search-box input {
+            width: 400px;
+            padding: 15px 20px;
+            font-size: large;
+            border: 1px solid wheat;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        #serch-btn {
+            padding: 12px 20px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            background-color: #2d4739;
+            color: #fdfcf7;
+            cursor: pointer;
+            margin-left: 8px;
+        }
+
+        search-box button:hover {
+            background-color: #1f3128;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #2d4739;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="site-header">
+        <h1>카페 (브랜드명)</h1>
+        <nav>
+            <a href="./07_teamproj.html">홈</a>
+            <a href="./07_teamproj_findstore.html" class="active">매장 찾기</a>
+            <a href="./07_teamproj_submenu.html">주문 관리</a>
+        </nav>
+    </header>
+
+
+
+
+
+
+    <!-- 주문관리 :  주문 오더 확인-->
+
+    <main class="container">
+        <h1 style=" margin-left:150px;" color="#2d4739"> 매장 찾기</h1>
+        <div class="search-box">
+            <input type="text" id="adress-input" placeholder="위치나 키워드를 입력하세요">
+            <button id="serch-btn">검색</button>
+
+        </div>
+        <br><br><br><br>
+
+        <script>
+            let map, service, markers = [];
+            function initMap() {
+                map = new google.maps.Map(document.getElementById('map'), { center: { lat: 37.5665, lng: 126.9780 }, zoom: 13 });
+                service = new google.maps.places.PlacesService(map);
+            }
+            function clearMarkers() { markers.forEach(m => m.setMap(null)); markers = []; }
+            document.getElementById('search-btn').addEventListener('click', () => {
+                const q = document.getElementById('address-input').value;
+                clearMarkers();
+                service.textSearch({ query: q + ' 카페' }, (res, status) => {
+                    if (status === google.maps.places.PlacesServiceStatus.OK) displayStores(res);
+                });
+            });
+            function displayStores(places) {
+                const bounds = new google.maps.LatLngBounds();
+                const listEl = document.getElementById('store-list'); listEl.innerHTML = '';
+                places.forEach(p => {
+                    const m = new google.maps.Marker({ map, position: p.geometry.location }); markers.push(m);
+                    bounds.extend(m.getPosition());
+                    const li = document.createElement('li');
+                    li.innerHTML = `<strong>${p.name}</strong><br>${p.formatted_address}`;
+                    li.onclick = () => map.panTo(m.getPosition());
+                    listEl.appendChild(li);
+                });
+                map.fitBounds(bounds);
+            }
+            window.initMap = initMap;
+        </script>
+
+    </main>
+
+    <footer>
+        &copy; 2025 수제커피브루 | 경기도 커피시 향기구 아라비카로 100
+    </footer>
+
+</body>
+
+</html>

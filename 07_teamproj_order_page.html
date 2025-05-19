@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주문하기 | 카페</title>
+    <link rel="stylesheet" href="styles.css">
+    <!--
+    1. 폼 제출로 주문 데이터를 JS 객체에 저장(sessionStorage).
+    2. 화면에 접수 완료 메시지 표시.
+  -->
+</head>
+
+<body>
+    <header class="site-header">
+        <h1>카페</h1>
+        <nav><a href="index.html">홈</a><a href="store_locator.html">매장 찾기</a><a href="order_page.html"
+                class="active">주문하기</a><a href="track_order.html">배송 확인</a></nav>
+    </header>
+    <main class="container">
+        <h2>주문하기(Frontend Only)</h2>
+        <form id="order-form">
+            <label>고객 이름: <input type="text" name="customer" required></label><br>
+            <label>메뉴: <select name="items">
+                    <option value="americano">브루드아메리카노</option>
+                    <option value="latte">시그니처 라떼</option>
+                    <option value="milk-latte">밀크 라떼</option>
+                    <option value="coldbrew">핸드드립 콜드브루</option>
+                    <option value="espreso">에스프레쏘</option>
+                </select></label><br>
+            <label>수량: <input type="number" name="qty" min="1" value="1"></label><br>
+            <button type="submit">주문하기</button>
+        </form>
+        <div id="order-confirm"></div>
+    </main>
+    <script>
+        document.getElementById('order-form').addEventListener('submit', e => {
+            e.preventDefault();
+            const f = e.target;
+            const data = { customer: f.customer.value, items: f.items.value, qty: f.qty.value };
+            sessionStorage.setItem('latestOrder', JSON.stringify(data));
+            document.getElementById('order-confirm').textContent = '주문이 접수되었습니다!';
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width:100px;
+            height:100px;
+            background-color: red;
+            position:relative;  /*원래 자신의 위치에서 이동, 자신의 자리를 유지*/
+            animation: boxmove 5s infinite alternate;
+        }
+        @keyframes boxmove {
+        from {left:0px; top:0px; background-color: red;}
+        25% {left:600px; top:300px; background-color: green;}
+        75% {left:900px; top:600px; background-color: yellowgreen;}
+        to {left:0px; top:0px; background-color: red;;}}
+    </style>
+</head>
+<body>
+    <div></div>
+</body>
+</html>
