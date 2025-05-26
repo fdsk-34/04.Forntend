@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //  함수를 정의 
+        function over(obj){     //over  함수  : 매개 변수로 obj
+            obj.src = './img/banana.png';
+
+        }
+        function out(obj){      //out  함수수
+            obj.src='./img/apple.png';
+        }
+    </script>
+        
+    </head>
+
+<body>
+    <!-- 함수=를 호출해서 자바 스크립트 사용용-->
+     <img src="./img/apple.png" alt="이미지"
+        onmouseover="over(this)"
+        onmouseout="out(this)"
+        onmousedown="this.src='./img/apple.png'"
+        onmouseup="this.src='./img/banana.png'"
+        >
+</body>
+</html>
