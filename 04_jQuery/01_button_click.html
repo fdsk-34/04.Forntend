@@ -9,17 +9,22 @@
      <script>   /*JQuery 사용을 위한 기본 준비 코드 생성 :*/ 
         $(document).ready(function(){
 
-            // jquery 코드 작성 블락 
+          $('button').click( function(){
+             $('p').hide();
+          })
+               
         })
 
         
 </script>
  </head>
  <body>
-    <!-- 
-        JQuery 사용을 위한 기본 준비 코드 생성: 
-            -라이브러리 등록 : CDN , 로컬
-            -JQuery를 사용한 이벤트 준비 코드 생성 
+   <!-- 버튼을 클릭시  엘리먼트 제어
+
+
     -->
+  <p>메세지 : 제이 쿼리를 공부 하고 있습니다</p>
+        <button> 메시지 삭제 </button>
+    
  </body>
  </html>
