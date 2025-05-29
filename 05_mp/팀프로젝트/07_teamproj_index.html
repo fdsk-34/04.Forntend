@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>수제커피브루 - 홈</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #2d4739;
+            color: white;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav {
+            display: flex;
+            justify-content: flex-end;
+        }
+        nav a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+        nav a.active {
+            font-weight: bold;
+        }
+        main {
+            padding: 20px;
+        }
+        .hero {
+           background: url('#' alt="핸드드립 커피 제조 이미지") center/cover no-repeat;
+            height: 300px;
+            color: white;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            text-shadow: 1px 1px 4px #000;
+            
+
+        }
+        }
+        .board-notice-box {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .notice-box, .free-board-box {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 48%;
+        }
+        .brand-story, .popular-menu {
+            background-color: #fff;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .menu-items {
+            display: flex;
+            justify-content: space-around;
+        }
+        .menu-item {
+            text-align: center;
+        }
+        .more-link {
+            display: block;
+            text-align: right;
+            color: #007BFF;
+            text-decoration: none;
+        }
+        footer {
+            background-color: #2d4739;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>수제커피 brand</h1>
+        <nav>            
+            <a href="./07_teamproj.html" class="active">홈</a>
+            <a href="./07_teamproj_submenu.html">메뉴</a>
+            <a href="./07_teamproj_findstore.html">매장 찾기</a>
+            <a href="./07_teamproj_dlivery.html" >배송현황</a>
+            <a href="./07_teamproj_order_tracking.html" >주문조회</a>
+            <a href="./07_teamproj_login.html">로그인</a>
+            <a href="./07_teamproj_join_page.html">회원 가입</a>
+            <a href="./07_teamproj_board.html">자유 게시판</a>
+            <span class="cart-icon">장바구니🛒<span class="cart-count">0</span></span>
+        </nav>
+    </header>
+
+    <main>
+        <h1 class="hero">매일 아침, 수제 커피의 향기로 시작하세요</h1>
+
+        <!-- 자유 게시판과 공지사항을 묶은 박스 -->
+        <div class="board-notice-box">
+            <!-- 공지사항 박스 -->
+            <div class="notice-box">
+                <h3>공지사항</h3>
+                <p>최근 공지사항을 확인하세요.</p>
+                <a href="notice_board.html" class="more-link">더 보기</a>
+            </div>
+            <!-- 자유 게시판 박스 -->
+            <div class="free-board-box">
+                <h3>자유 게시판</h3>
+                <p>최근 게시물을 확인하세요.</p>
+                <a href="free_board.html" class="more-link">더 보기</a>
+            </div>
+        </div>
+
+        <!-- 브랜드 이야기 박스 -->
+        <div class="brand-story">
+            <h3>브랜드 이야기</h3>
+            <p>신선한 원두와 정성스러운 핸드드립으로 만든 커피. 수제커피브루는 자연에서 온 맛을 전합니다.</p>
+        </div>
+
+        <!-- 인기 메뉴 박스 -->
+        <div class="popular-menu">
+            <h3>인기 메뉴</h3>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <img src="..." alt="브루드 아메리카노">
+                    <p>브루드 아메리카노</p>
+                </div>
+                <div class="menu-item">
+                    <img src="..." alt="핸드드립 콜드브루">
+                    <p>핸드드립 콜드브루</p>
+                </div>
+                <div class="menu-item">
+                    <img src="..." alt="시그니처 라떼">
+                    <p>시그니처 라떼</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <p>
+    <footer>
+        <p>© 2025 수제커피브루 | 경기도 커피시 향기구 아라비카로 100</p>
+    </footer>
+    </p>
+</body>
+</html>

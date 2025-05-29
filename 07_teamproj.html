@@ -27,7 +27,9 @@
             margin: 0 15px;
             text-decoration: none;
         }
-
+        nav a.active {
+            font-weight: bold;
+        }
         .hero {
             background: url('#' alt="핸드드립 커피 제조 이미지") center/cover no-repeat;
             height: 400px;
@@ -105,13 +107,16 @@
 <body>
 
     <header>
-        <h1>수제커피 brand</h1>
-        <nav>
-            <a href="#">브랜드 소개</a>
+        <h1>수제커피 이른 아침</h1>
+        <nav>            
+            <a href="./07_teamproj.html" class="active">홈</a>
             <a href="./07_teamproj_submenu.html">메뉴</a>
             <a href="./07_teamproj_findstore.html">매장 찾기</a>
             <a href="./07_teamproj_order_page.html">배송현황</a>
-            <a href="#">문의</a>
+            <a href="./07_teamproj_order_tracking.html">주문조회</a>
+            <a href="./07_teamproj_login.html">로그인</a>
+            <a href="./07_teamproj_join_page.html">회원 가입</a>
+            <span class="cart-icon">장바구니🛒<span class="cart-count">0</span></span>
         </nav>
     </header>
 

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인 | 카페</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #fdfcf7;
+            color: #333;
+        }
+
+        header {
+            background-color: #2d4739;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+
+        nav a.active {
+            font-weight: bold;
+        }
+
+        .container {
+            margin-left: 70px;
+            margin-top: 70px;
+        }
+
+        #login-form {
+            width: 400px;
+            color: #fdfcf7;
+            background-color: rgba(20, 57, 6, 0.537);
+            text-align: center;
+            margin: 0 auto;
+            padding: 15px 20px;
+            font-size: large;
+            border: 1px solid wheat;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        #login-form label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        #login-form input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        #login-btn {
+            width: 300px;
+            padding: 12px 20px;
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+            background-color: #2d4739;
+            color: white;
+            margin: 20px auto;
+            display: block;
+            cursor: pointer;
+        }
+
+        #login-btn:hover {
+            background-color: #1f3128;
+        }
+
+        #image-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+        }
+
+        #login-confirm {
+            width: 400px;
+            margin: 20px auto;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        #login-confirm.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        #login-confirm.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #2d4739;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <h1>카페 (브랜드명)</h1>
+        <nav>            
+            <a href="./07_teamproj.html">홈</a>
+            <a href="./07_teamproj_submenu.html">메뉴</a>
+            <a href="./07_teamproj_findstore.html">매장 찾기</a>
+            <a href="./07_teamproj_order_page.html">배송현황</a>
+            <a href="./07_teamproj_order_tracking.html" >주문조회</a>
+            <a href="./07_teamproj_login.html" class="active">로그인</a>
+            <a href="./07_teamproj_join_page.html">회원 가입</a>
+            <span class="cart-icon">장바구니🛒<span class="cart-count">0</span></span>
+        </nav>
+    </header>
+    <main class="container">
+        <div id="image-container">
+            <img src="https://via.placeholder.com/400x150?text=Cafe+Logo" alt="Cafe Logo">
+        </div>
+        <form id="login-form">
+            <h2>로그인</h2>
+            <label>이메일: 
+                <input type="email" name="email" id="email-input" required>
+            </label>
+            <label>비밀번호: 
+                <input type="password" name="password" id="password-input" required>
+            </label>
+            <button id="login-btn" type="submit">로그인</button>
+            <p><a href="recover_page.html">아이디/비밀번호 찾기</a></p>
+        </form>
+        <div id="login-confirm"></div>
+    </main>
+    <footer>
+        © 2025 수제커피브루 | 경기도 커피시 향기구 아라비카로 100
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('login-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const form = e.target;
+                const email = form.email.value;
+                const password = form.password.value;
+                const confirmDiv = document.getElementById('login-confirm');
+                const storedData = JSON.parse(sessionStorage.getItem('latestRegistration') || '{}');
+                
+                if (storedData.email === email && storedData.password === password) {
+                    confirmDiv.textContent = '로그인 성공!';
+                    confirmDiv.className = 'success';
+                } else {
+                    confirmDiv.textContent = '이메일 또는 비밀번호가 잘못되었습니다.';
+                    confirmDiv.className = 'error';
+                }
+                form.reset();
+            });
+        });
+    </script>
+</body>
+</html>

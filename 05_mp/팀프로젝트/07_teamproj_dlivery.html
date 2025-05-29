@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배송현황 | 수제커피브루</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #fff;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background-color: #2d4739;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        nav a.active {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+        main {
+            flex: 1;
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+        }
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: #719CED;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 0.8rem;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background-color: #fdfcf7;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+        }
+        .search-box {
+            max-width: 1350px;
+            margin-bottom: 40px;
+        }
+        .search-box .input-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .search-box input, .search-box select {
+            padding: 10px;
+            font-size: 0.9em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .search-box input {
+            width: 400px;
+            height: 40px;
+        }
+        .search-box select {
+            width: 200px;
+            height: 40px;
+        }
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            height: 40px;
+        }
+        .search-box button {
+            width: 100px;
+            font-size: 0.9em;
+            line-height: 40px;
+            border: none;
+            border-radius: 5px;
+            background-color: #2d4739;
+            color: #fdfcf7;
+            cursor: pointer;
+            padding: 0;
+        }
+        .search-box button:hover {
+            background-color: #1f3128;
+        }
+        .search-box .error {
+            color: #e67e22;
+            font-size: 0.8em;
+            margin-top: 5px;
+            display: none;
+            width: 100%;
+        }
+        .image-container {
+            width: 100%;
+            height: 200px;
+            margin-top: 20px;
+            background-color: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+        }
+        .no-order {
+            background-color: #fdfcf7;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+            text-align: center;
+            display: none;
+        }
+        .order-details-panel {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 400px;
+            height: 100%;
+            background-color: #fdfcf7;
+            border-left: 1px solid #ccc;
+            box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+            padding: 20px;
+            z-index: 1000;
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+            overflow-y: auto;
+        }
+        .order-details-panel.open {
+            display: block;
+            transform: translateX(0);
+        }
+        .order-details-panel select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+        .order-details {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+        .order-details h3 {
+            color: #2d4739;
+            margin-top: 0;
+        }
+        .order-items {
+            margin: 20px 0;
+        }
+        .order-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .status-timeline {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .status-step {
+            text-align: center;
+            flex: 1;
+            position: relative;
+        }
+        .status-step.active {
+            font-weight: bold;
+            color: #2d4739;
+        }
+        .status-step::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            width: 10px;
+            height: 10px;
+            background-color: #ccc;
+            border-radius: 50%;
+            transform: translateX(-50%);
+        }
+        .status-step.active::before {
+            background-color: #2d4739;
+        }
+        .btn.cancel-btn {
+            background-color: #e67e22;
+            color: #fff;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            margin-top: 10px;
+            width: 100%;
+        }
+        .btn.cancel-btn:hover {
+            background-color: #d35400;
+        }
+        .btn.cancel-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        .btn.close-btn {
+            display: block;
+            margin: 10px auto;
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #2d4739;
+            padding: 10px;
+            min-height: 44px;
+        }
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+        .sidebar-panel {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 100%;
+            background-color: #fdfcf7;
+            border-left: 1px solid #ccc;
+            box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+            padding: 20px;
+            z-index: 1001;
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        .sidebar-panel.open {
+            display: block;
+            transform: translateX(0);
+        }
+        .sidebar-panel-content {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .sidebar-panel-content p {
+            margin: 0 0 20px;
+            font-size: 1em;
+            color: #333;
+        }
+        .sidebar-panel-content .btn-group {
+            margin-top: auto;
+            display: flex;
+            gap: 10px;
+        }
+        .sidebar-panel-content button {
+            flex: 1;
+            padding: 10px;
+        }
+        footer {
+            background-color: #2d4739;
+            color: #fdfcf7;
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+        }
+        @media (max-width: 768px) {
+            main {
+                padding: 0 10px;
+            }
+            .search-box {
+                max-width: 100%;
+            }
+            .search-box .input-group {
+                flex-direction: column;
+            }
+            .search-box input, .search-box select, .search-box .btn-group {
+                width: 100%;
+            }
+            .search-box button {
+                width: 100%;
+                line-height: normal;
+                padding: 10px;
+            }
+            .image-container {
+                height: 150px;
+            }
+            .status-timeline {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .status-step::before {
+                top: 0;
+                left: -10px;
+                transform: none;
+            }
+            .order-details-panel {
+                width: 100%;
+                max-width: none;
+            }
+            .sidebar-panel {
+                width: 100%;
+                max-width: none;
+            }
+            .sidebar-panel-content .btn-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>수제커피브루</h1>
+       <nav>            
+            <a href="./07_teamproj.html" >홈</a>
+            <a href="./07_teamproj_submenu.html">메뉴</a>
+            <a href="./07_teamproj_findstore.html">매장 찾기</a>
+            <a href="./07_teamproj_dlivery.html" class="active">배송현황</a>
+            <a href="./07_teamproj_order_tracking.html" >주문조회</a>
+            <a href="./07_teamproj_login.html">로그인</a>
+            <a href="./07_teamproj_join_page.html">회원 가입</a>
+            <a href="./07_teamproj_board.html">자유 게시판</a>
+            <span class="cart-icon">장바구니🛒<span class="cart-count">0</span></span>
+        </nav>
+    </header>
+
+    <main>
+        <h2 style="color: #2d4739; margin-bottom: 20px;">배송현황 조회</h2>
+        <div class="search-box">
+            <div class="input-group">
+                <input type="text" id="order-id" placeholder="주문 번호를 입력하세요 (예: ORD123456789,ORD987654321)">
+                <select id="search-history" onchange="selectSearchHistory()">
+                    <option value="">최근 조회 기록</option>
+                </select>
+                <select id="sort-order">
+                    <option value="latest">최신순</option>
+                    <option value="total-asc">총액 낮은순</option>
+                    <option value="total-desc">총액 높은순</option>
+                </select>
+                <select id="status-filter">
+                    <option value="" selected>전체</option>
+                    <option value="주문 접수">주문 접수</option>
+                    <option value="배송 준비">배송 준비</option>
+                    <option value="배송 중">배송 중</option>
+                    <option value="완료">완료</option>
+                    <option value="취소됨">취소됨</option>
+                </select>
+                <div class="btn-group">
+                    <button class="btn" onclick="trackOrder()">조회</button>
+                    <button class="btn" onclick="resetSearch()">취소</button>
+                    <button class="btn" onclick="clearSearchHistory()">조회 기록 삭제</button>
+                </div>
+            </div>
+            <span class="error" id="order-id-error"></span>
+            <div class="image-container">
+                <!-- 이미지 삽입 공간 -->
+                <p>이미지 삽입 공간</p>
+            </div>
+        </div>
+        <div class="no-order" id="no-order">
+            <p>조회된 주문이 없습니다.</p>
+        </div>
+    </main>
+
+    <div class="modal-overlay" id="modal-overlay" onclick="closeOrderPanel()"></div>
+    <div class="order-details-panel" id="order-details-panel">
+        <select id="order-select" onchange="displayOrderDetails(this.value)">
+            <option value="">주문을 선택하세요</option>
+        </select>
+        <div id="order-details-content"></div>
+    </div>
+    <div class="sidebar-panel" id="cancel-panel">
+        <div class="sidebar-panel-content">
+            <p id="cancel-message"></p>
+            <div class="btn-group">
+                <button class="btn" onclick="confirmCancel()">확인</button>
+                <button class="btn" onclick="closeCancelPanel()">취소</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        © 2025 수제커피브루 | 경기도 커피시 향기구 아라비카로 100
+    </footer>
+
+    <script>
+        // 조회 기록 로드
+        let searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
+        let currentOrders = [];
+        updateSearchHistoryDropdown();
+
+        function updateSearchHistoryDropdown() {
+            const historySelect = document.getElementById('search-history');
+            historySelect.innerHTML = '<option value="">최근 조회 기록</option>';
+            searchHistory.forEach(history => {
+                historySelect.innerHTML += `<option value="${history.orderId}">${history.orderId}</option>`;
+            });
+        }
+
+        function saveSearchHistory(orderIds) {
+            orderIds.forEach(orderId => {
+                searchHistory = searchHistory.filter(h => h.orderId !== orderId);
+                searchHistory.unshift({ orderId, timestamp: new Date().toISOString() });
+            });
+            if (searchHistory.length > 5) {
+                searchHistory.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+                searchHistory = searchHistory.slice(0, 5);
+            }
+            localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+            updateSearchHistoryDropdown();
+        }
+
+        function clearSearchHistory() {
+            searchHistory = [];
+            localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+            updateSearchHistoryDropdown();
+            alert('조회 기록이 삭제되었습니다.');
+        }
+
+        function selectSearchHistory() {
+            const historySelect = document.getElementById('search-history');
+            if (historySelect.value) {
+                document.getElementById('order-id').value = historySelect.value;
+            }
+        }
+
+        function resetSearch() {
+            document.getElementById('order-id').value = '';
+            document.getElementById('sort-order').value = 'latest';
+            document.getElementById('status-filter').value = '';
+            document.getElementById('order-id-error').style.display = 'none';
+            document.getElementById('no-order').style.display = 'none';
+            closeOrderPanel();
+        }
+
+        function openOrderPanel() {
+            document.getElementById('modal-overlay').style.display = 'block';
+            document.getElementById('order-details-panel').classList.add('open');
+        }
+
+        function closeOrderPanel() {
+            document.getElementById('order-details-panel').classList.remove('open');
+            document.getElementById('modal-overlay').style.display = 'none';
+            document.getElementById('order-select').innerHTML = '<option value="">주문을 선택하세요</option>';
+            document.getElementById('order-details-content').innerHTML = '';
+            currentOrders = [];
+        }
+
+        function displayOrderDetails(orderId) {
+            const order = currentOrders.find(o => o.orderId === orderId);
+            if (!order) return;
+            const content = document.getElementById('order-details-content');
+            content.innerHTML = `
+                <div class="order-details">
+                    <h3>주문 정보</h3>
+                    <p><strong>주문 번호:</strong> <span>${order.orderId}</span></p>
+                    <p><strong>배송지:</strong> <span>${order.address}</span></p>
+                    <p><strong>연락처:</strong> <span>${order.phone}</span></p>
+                    <p><strong>결제 수단:</strong> <span>${order.payment === 'card' ? '신용카드' : '간편결제'}</span></p>
+                    <p><strong>총액:</strong> ₩<span>${order.total}</span></p>
+                    <div class="order-items">
+                        ${order.items.map(item => `
+                            <div class="order-item">
+                                <p>${item.name} (${item.temp}, ${item.extraShot ? '샷 추가, ' : ''}${item.syrup !== 'none' ? item.syrup + ' 시럽' : ''}) 
+                                - ₩${item.price} x ${item.quantity}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="status-timeline">
+                        <div class="status-step ${order.status === '주문 접수' ? 'active' : ''}" data-status="주문 접수">주문 접수</div>
+                        <div class="status-step ${order.status === '배송 준비' ? 'active' : ''}" data-status="배송 준비">배송 준비</div>
+                        <div class="status-step ${order.status === '배송 중' ? 'active' : ''}" data-status="배송 중">배송 중</div>
+                        <div class="status-step ${order.status === '완료' ? 'active' : ''}" data-status="완료">완료</div>
+                        <div class="status-step ${order.status === '취소됨' ? 'active' : ''}" data-status="취소됨">취소됨</div>
+                    </div>
+                    <button class="btn cancel-btn" ${order.status !== '주문 접수' ? 'disabled' : ''} onclick="openCancelPanel('${order.orderId}')">취소</button>
+                    <button class="btn close-btn" onclick="closeOrderPanel()">닫기</button>
+                </div>
+            `;
+        }
+
+        function trackOrder() {
+            const orderIdInput = document.getElementById('order-id').value.trim();
+            const sortOrder = document.getElementById('sort-order').value;
+            const statusFilter = document.getElementById('status-filter').value;
+            const orderIdError = document.getElementById('order-id-error');
+            const noOrder = document.getElementById('no-order');
+
+            // 초기화
+            orderIdError.style.display = 'none';
+            noOrder.style.display = 'none';
+            closeOrderPanel();
+
+            // 주문 번호 파싱
+            const orderIds = orderIdInput ? orderIdInput.split(',').map(id => id.trim()).filter(id => id) : [];
+            const invalidIds = orderIds.filter(id => !/^ORD\d+$/.test(id));
+
+            // 유효성 검사
+            if (orderIds.length === 0 && statusFilter === '') {
+                orderIdError.textContent = '주문 번호를 입력하거나 상태를 선택해주세요.';
+                orderIdError.style.display = 'block';
+                return;
+            }
+            if (invalidIds.length > 0) {
+                orderIdError.textContent = `유효하지 않은 주문 번호: ${invalidIds.join(', ')}`;
+                orderIdError.style.display = 'block';
+                return;
+            }
+
+            // 주문 조회
+            let orders = JSON.parse(localStorage.getItem('orders')) || [];
+            let filteredOrders = orders;
+
+            // 상태 필터 적용
+            if (statusFilter) {
+                filteredOrders = filteredOrders.filter(o => o.status === statusFilter);
+            }
+
+            // 주문 번호 필터 적용
+            if (orderIds.length > 0) {
+                filteredOrders = filteredOrders.filter(o => orderIds.includes(o.orderId));
+            }
+
+            if (filteredOrders.length === 0) {
+                noOrder.style.display = 'block';
+                return;
+            }
+
+            // 조회 기록 저장
+            if (orderIds.length > 0) {
+                saveSearchHistory(orderIds);
+            }
+
+            // 정렬
+            filteredOrders.sort((a, b) => {
+                if (sortOrder === 'total-asc') return a.total - b.total;
+                if (sortOrder === 'total-desc') return b.total - a.total;
+                return new Date(b.createdAt) - new Date(a.createdAt); // latest
+            });
+
+            // 주문 패널 표시
+            currentOrders = filteredOrders;
+            const orderSelect = document.getElementById('order-select');
+            orderSelect.innerHTML = '<option value="">주문을 선택하세요</option>';
+            filteredOrders.forEach(order => {
+                orderSelect.innerHTML += `<option value="${order.orderId}">${order.orderId}</option>`;
+            });
+            if (filteredOrders.length > 0) {
+                orderSelect.value = filteredOrders[0].orderId;
+                displayOrderDetails(filteredOrders[0].orderId);
+                openOrderPanel();
+            }
+        }
+
+        function openCancelPanel(orderId) {
+            document.getElementById('cancel-message').textContent = `주문 번호 ${orderId}을 취소하시겠습니까?`;
+            document.getElementById('cancel-panel').dataset.orderId = orderId;
+            document.getElementById('modal-overlay').style.display = 'block';
+            document.getElementById('cancel-panel').classList.add('open');
+        }
+
+        function closeCancelPanel() {
+            document.getElementById('cancel-panel').classList.remove('open');
+            document.getElementById('modal-overlay').style.display = 'none';
+            document.getElementById('cancel-panel').dataset.orderId = '';
+        }
+
+        function confirmCancel() {
+            const orderId = document.getElementById('cancel-panel').dataset.orderId;
+            let orders = JSON.parse(localStorage.getItem('orders')) || [];
+            const order = orders.find(o => o.orderId === orderId);
+            if (order && order.status === '주문 접수') {
+                order.status = '취소됨';
+                localStorage.setItem('orders', JSON.stringify(orders));
+                alert(`주문 번호 ${orderId}이 취소되었습니다.`);
+                closeCancelPanel();
+                trackOrder();
+            }
+        }
+
+        // Enter 키로 조회
+        document.getElementById('order-id').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') trackOrder();
+        });
+    </script>
+</body>
+</html>

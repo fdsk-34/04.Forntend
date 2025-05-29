@@ -1,0 +1,364 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 보기 | 수제커피브루</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #fff;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background-color: #2d4739;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        nav a.active {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+        main {
+            flex: 1;
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+        }
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: #719CED;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 0.8rem;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background-color: #fdfcf7;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+        }
+        .post-box {
+            width: 600px;
+            height: 500px;
+            background-color: #fdfcf7;
+            padding: 20px;
+            border: 2px solid #2d4739;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            overflow-y: auto;
+        }
+        .post-box label {
+            display: block;
+            margin-bottom: 5px;
+            color: #2d4739;
+            font-weight: bold;
+        }
+        .post-box input[type="text"],
+        .post-box textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 0.9em;
+            box-sizing: border-box;
+            background-color: #f9f9f9;
+            cursor: default;
+        }
+        .post-box textarea {
+            height: 200px;
+            resize: none;
+        }
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .btn-group button {
+            width: 100px;
+            height: 40px;
+            font-size: 0.9em;
+            border: none;
+            border-radius: 5px;
+            background-color: #2d4739;
+            color: #fdfcf7;
+            cursor: pointer;
+        }
+        .btn-group button:hover {
+            background-color: #1f3128;
+        }
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+        .delete-auth-panel {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            background-color: #fdfcf7;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        .delete-auth-panel.open {
+            display: block;
+        }
+        .delete-auth-panel input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 0.9em;
+            box-sizing: border-box;
+        }
+        .delete-auth-panel .btn-group {
+            justify-content: flex-end;
+        }
+        footer {
+            background-color: #2d4739;
+            color: #fdfcf7;
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+        }
+        @media (max-width: 768px) {
+            main {
+                padding: 0 10px;
+            }
+            .post-box {
+                width: 90%;
+                height: auto;
+                min-height: 400px;
+            }
+            .btn-group {
+                flex-direction: column;
+            }
+            .btn-group button {
+                width: 100%;
+            }
+            .delete-auth-panel {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>수제커피브루</h1>
+        <nav>            
+            <a href="./07_teamproj.html" >홈</a>
+            <a href="./07_teamproj_submenu.html">메뉴</a>
+            <a href="./07_teamproj_findstore.html">매장 찾기</a>
+            <a href="./07_teamproj_dlivery.html" >배송현황</a>
+            <a href="./07_teamproj_order_tracking.html" >주문조회</a>
+            <a href="./07_teamproj_login.html">로그인</a>
+            <a href="./07_teamproj_join_page.html">회원 가입</a>
+            <a href="./07_teamproj_board.html" class="active">자유 게시판</a>
+            <span class="cart-icon">장바구니🛒<span class="cart-count">0</span></span>
+        </nav>
+    </header>
+
+    <main>
+        <h2 style="color: #2d4739; margin-bottom: 20px;">게시글 보기</h2>
+        <div class="post-box" id="post-details"></div>
+        <div class="btn-group">
+            <button onclick="openDeleteAuth()">삭제</button>
+            <button onclick="closePost()">닫기</button>
+        </div>
+    </main>
+
+    <div class="modal-overlay" id="modal-overlay" onclick="closeDeleteAuth()"></div>
+    <div class="delete-auth-panel" id="delete-auth-panel">
+        <h3 style="color: #2d4739;">삭제 암호 입력</h3>
+        <input type="password" id="delete-password" placeholder="암호를 입력하세요">
+        <div class="btn-group">
+            <button onclick="verifyAndDelete()">확인</button>
+            <button onclick="closeDeleteAuth()">취소</button>
+        </div>
+    </div>
+
+    <footer>
+        © 2025 수제커피브루 | 경기도 커피시 향기구 아라비카로 100
+    </footer>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const postId = urlParams.get('id');
+        let posts = JSON.parse(localStorage.getItem('posts')) || [];
+
+        console.log('Post ID from URL:', postId);
+        console.log('Posts loaded:', posts);
+
+        posts = posts.map(post => ({
+            ...post,
+            id: String(post.id),
+            views: post.views || 0,
+            password: post.password || ''
+        }));
+        localStorage.setItem('posts', JSON.stringify(posts));
+
+        function loadPost() {
+            if (!postId) {
+                document.getElementById('post-details').innerHTML = '<p>잘못된 게시글 ID입니다.</p>';
+                console.log('Error: No postId provided');
+                return;
+            }
+
+            const post = posts.find(p => p.id === postId || p.id === String(postId));
+            console.log('Found post:', post);
+
+            if (!post) {
+                document.getElementById('post-details').innerHTML = '<p>게시글을 찾을 수 없습니다. 게시글이 삭제되었거나 존재하지 않습니다.</p>';
+                console.log('Error: Post not found for ID', postId);
+                return;
+            }
+
+            post.views = (post.views || 0) + 1;
+            localStorage.setItem('posts', JSON.stringify(posts));
+            console.log('Updated post with views:', post);
+
+            document.getElementById('post-details').innerHTML = `
+                <label for="post-title">제목</label>
+                <input type="text" id="post-title" value="${post.title || '제목 없음'}" readonly>
+                <label for="post-author">작성자</label>
+                <input type="text" id="post-author" value="${post.author || '익명'}" readonly>
+                <label for="post-date">작성일</label>
+                <input type="text" id="post-date" value="${new Date(post.createdAt).toLocaleDateString('ko-KR')}" readonly>
+                <label for="post-views">조회수</label>
+                <input type="text" id="post-views" value="${post.views || 0}" readonly>
+                <label for="post-content">내용</label>
+                <textarea id="post-content" readonly>${post.content || ''}</textarea>
+            `;
+        }
+
+        function openDeleteAuth() {
+            document.getElementById('modal-overlay').style.display = 'block';
+            document.getElementById('delete-auth-panel').classList.add('open');
+            document.getElementById('delete-password').value = '';
+        }
+
+        function closeDeleteAuth() {
+            document.getElementById('modal-overlay').style.display = 'none';
+            document.getElementById('delete-auth-panel').classList.remove('open');
+        }
+
+        function verifyAndDelete() {
+            const inputPassword = document.getElementById('delete-password').value.trim();
+            if (!inputPassword) {
+                alert('암호를 입력해주세요.');
+                return;
+            }
+
+            const post = posts.find(p => p.id === postId || p.id === String(postId));
+            if (!post) {
+                alert('게시글을 찾을 수 없습니다.');
+                closeDeleteAuth();
+                return;
+            }
+
+            if (post.password !== inputPassword) {
+                alert('암호가 일치하지 않습니다.');
+                return;
+            }
+
+            if (!confirm('게시글을 삭제하시겠습니까?')) return;
+
+            posts = posts.filter(p => p.id !== postId && p.id !== String(postId));
+            localStorage.setItem('posts', JSON.stringify(posts));
+            console.log('Post deleted, remaining posts:', posts);
+            alert('게시글이 삭제되었습니다.');
+            closeDeleteAuth();
+            location.href = '07_teamproj_board.html';
+        }
+
+        function closePost() {
+            location.href = '07_teamproj_board.html';
+        }
+
+        loadPost();
+    </script>
+</body>
+</html>

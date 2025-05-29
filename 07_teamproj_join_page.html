@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입 | 카페</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #fdfcf7;
+            color: #333;
+        }
+
+        header {
+            background-color: #2d4739;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+
+        nav a.active {
+            font-weight: bold;
+        }
+
+        .container {
+            margin-left: 70px;
+            margin-top: 70px;
+        }
+
+        #register-form {
+            width: 400px;
+            color: #fdfcf7;
+            background-color: rgba(20, 57, 6, 0.537);
+            text-align: center;
+            margin: 0 auto;
+            padding: 15px 20px;
+            font-size: large;
+            border: 1px solid wheat;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        #register-form label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        #register-form input,
+        #register-form select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        #serch-btn2 {
+            width: 300px;
+            padding: 12px 20px;
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+            background-color: #2d4739;
+            color: white;
+            margin: 20px auto;
+            display: block;
+            cursor: pointer;
+        }
+
+        #serch-btn2:hover {
+            background-color: #1f3128;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #2d4739;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
+</head>
+<body>
+    <header class="site-header">
+        <h1>이른 아침 | 회원 가입</h1>
+        <nav>            
+            <a href="./07_teamproj.html">홈</a>
+            <a href="./07_teamproj_submenu.html">메뉴</a>
+            <a href="./07_teamproj_findstore.html">매장 찾기</a>
+            <a href="./07_teamproj_order_page.html">배송현황</a>
+            <a href="./07_teamproj_order_tracking.html" >주문조회</a>
+            <a href="./07_teamproj_login.html">로그인</a>
+            <a href="./07_teamproj_join_page.html" class="active">회원 가입</a>
+            <span class="cart-icon">장바구니🛒<span class="cart-count">0</span></span>
+        </nav>
+    </header>
+    <main class="container">
+        <form id="register-form">
+            <h2>회원가입</h2>
+            <label>이름: 
+                <input type="text" name="name" id="name-input" required>
+            </label>
+            <label>이메일: 
+                <input type="email" name="email" id="email-input" required>
+            </label>
+            <label>비밀번호: 
+                <input type="password" name="password" id="password-input" required>
+            </label>
+            <label>연락처: 
+                <input type="tel" name="phone" id="phone-input" placeholder="010-1234-5678" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required>
+            </label>
+            <label>주소: 
+                <input type="text" name="address" id="address-input" placeholder="도로명 주소를 입력하세요" required>
+            </label>
+            <button id="serch-btn2" type="submit">회원가입</button>
+        </form>
+        <div id="register-confirm"></div>
+    </main>
+    <footer>
+        © 2025 수제커피브루 | 경기도 커피시 향기구 아라비카로 100
+    </footer>
+    <script>
+        function initAutocomplete() {
+            const autocomplete = new google.maps.places.Autocomplete(
+                document.getElementById('address-input'),
+                { types: ['address'], componentRestrictions: { country: 'kr' } }
+            );
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initAutocomplete();
+            document.getElementById('register-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const form = e.target;
+                const data = {
+                    name: form.name.value,
+                    email: form.email.value,
+                    password: form.password.value,
+                    phone: form.phone.value,
+                    address: form.address.value
+                };
+                sessionStorage.setItem('latestRegistration', JSON.stringify(data));
+                document.getElementById('register-confirm').textContent = '회원가입이 완료되었습니다!';
+                form.reset();
+            });
+        });
+    </script>
+</body>
+</html>

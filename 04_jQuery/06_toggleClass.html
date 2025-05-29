@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CDN으로 라이브러리 등록</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
+    <script src="./js/jquery-3.7.1.slim.min.js"></script>
+    <script>   /*JQuery 사용을 위한 기본 준비 코드 생성 :*/
+        $(document).ready(function () {
+
+            // jquery 코드 작성 블락
+            $('.toggle').click(function () {
+                console.log("클래스 추가 호출 성공")
+                $('h1, h2, p').toggleClass('blue');
+                $('p').toggleClass('important');
+            })
+
+    
+        })
+
+
+    </script>
+    <style>
+        .wrap {
+            width: 500px;
+            margin: 0 auto;
+            border: 1px solid red;
+            text-align: center;
+        }
+
+        /* 태그에 적용할 스타일을 정의 */
+        .important {
+            font-weight: bold;
+            font-size: xx-large;
+        }
+
+        .blue {
+            color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 
+        JQuery 사용을 위한 기본 준비 코드 생성: 
+            -라이브러리 등록 : CDN , 로컬
+            -JQuery를 사용한 이벤트 준비 코드 생성 
+    -->
+    <div class="wrap">
+        <h1> HTML5</h1>
+        <h2> CSS3 </h2>
+        <div> JavaScript (ES6) </div>
+        <p> JQuery </p>
+
+        <button class="toggle"> CSS 적용/제거</button>
+        
+    </div>
+</body>
+
+</html>

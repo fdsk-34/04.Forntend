@@ -1,0 +1,12 @@
+.box {
+  width: 1120px;
+  height: 3431px;
+}
+
+.box .upgrade-to-coolicons {
+  position: fixed;
+  width: 1120px;
+  height: 3431px;
+  top: 0;
+  left: 0;
+}

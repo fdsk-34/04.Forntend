@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>아이디/비밀번호 찾기 | 수제커피 이른 아침</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #fdfcf7;
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        header {
+            background-color: #2d4739;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        nav a.active {
+            font-weight: bold;
+        }
+        .container {
+            flex: 1;
+            padding-bottom: 80px; /* Space for fixed footer */
+        }
+        .recover-form {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .btn {
+            background-color: #2d4739;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto;
+        }
+        .btn:hover {
+            background-color: #3e5c4a;
+        }
+        .image-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .image-container img {
+            max-width: 400px;
+            height: auto;
+            border-radius: 10px;
+        }
+        .recover-result {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .recover-result.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .recover-result.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        footer {
+            background-color: #2d4739;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            z-index: 500;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>수제커피 이른 아침</h1>
+        <nav>
+            <a href="./07_teamproj.html">홈</a>
+            <a href="./07_teamproj_menudetail.html">메뉴</a>
+            <a href="./07_teamproj_findstore.html">매장 찾기</a>
+            <a href="./07_teamproj_order_page.html">주문조회</a>
+            <a href="./login_page.html">로그인</a>
+            <a href="./recover_page.html" class="active">아이디/비밀번호 찾기</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="image-container">
+            <img src="https://via.placeholder.com/400x150?text=Cafe+Logo" alt="Cafe Logo">
+        </div>
+        <div class="recover-form">
+            <h2>아이디/비밀번호 찾기</h2>
+            <div class="form-group">
+                <label for="name">이름</label>
+                <input type="text" id="name" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">연락처</label>
+                <input type="tel" id="phone" placeholder="010-1234-5678" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required>
+            </div>
+            <button class="btn" onclick="recoverAccount()">아이디/비밀번호 찾기</button>
+            <p><a href="./login_page.html">로그인 페이지로 돌아가기</a></p>
+        </div>
+        <div class="recover-result" id="recoverResult"></div>
+    </main>
+
+    <footer>
+        © 2025 수제커피브루 | 경기도 커피시 향기구 아라비카로 100
+    </footer>
+
+    <script>
+        function recoverAccount() {
+            const name = document.getElementById('name').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const resultDiv = document.getElementById('recoverResult');
+            const storedData = JSON.parse(sessionStorage.getItem('latestRegistration') || '{}');
+
+            if (!name || !phone) {
+                resultDiv.textContent = '모든 필드를 입력해주세요.';
+                resultDiv.className = 'recover-result error';
+                return;
+            }
+
+            if (storedData.name === name && storedData.phone === phone) {
+                resultDiv.textContent = `아이디: ${storedData.email} (비밀번호 재설정 링크가 이메일로 전송되었습니다.)`;
+                resultDiv.className = 'recover-result success';
+            } else {
+                resultDiv.textContent = '일치하는 회원 정보가 없습니다.';
+                resultDiv.className = 'recover-result error';
+            }
+
+            document.getElementById('name').value = '';
+            document.getElementById('phone').value = '';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Clear result on page load
+            document.getElementById('recoverResult').textContent = '';
+        });
+    </script>
+</body>
+</html>
