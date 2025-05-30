@@ -5,140 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>매장 검색 및 주소 찾기</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./findstore.css">
 
     <style>
-        /*구글 프론트엔드 과정 요약
-         1 initMap(): 구글 맵 초기화
-         2.검색버튼 클릭시  텍스트 값으로 장소 검색
-         3 결과를 displayStores로 리스트와 마커에 렌더링
-         4 리스트 클릭 시 지도 중심 이동 */
-
-        body {
-            margin: 0;
-            font-family: 'Noto Sans KR', sans-serif;
-            background-color: #fdfcf7;
-            color: #333;
-
-        }
-
-        header {
-            background-color: #2d4739;
-            color: white;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-        }
-
-        #map {
-            height: 700px;
-            width: 70%;
-            margin-left: 600px;
-            margin-top: -200px;
-            border: 1px solid #ccc;
-        }
-
-        nav a {
-            color: white;
-            margin: 0 15px;
-            text-decoration: none;
-        }
-        nav a.active {
-            font-weight: bold;
-        }
-        .cart-icon {
-            position: relative;
-            cursor: pointer;
-        }
-        .cart-count {
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            background-color: #719CED;
-            color: white;
-            border-radius: 50%;
-            padding: 2px 6px;
-            font-size: 0.8rem;
-        }
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-        .modal-content {
-            background-color: #fdfcf7;
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 500px;
-            width: 90%;
-        }
-        .container {
-            margin-left: 70px;
-            margin-top: 70px;
-        }
-
-        .search-box input {
-            width: 400px;
-            padding: 15px 20px;
-            font-size: large;
-            border: 1px solid wheat;
-            border-radius: 6px;
-            box-sizing: border-box;
-        }
-
-        #search-btn {
-            padding: 12px 20px;
-            font-size: 1em;
-            border: none;
-            border-radius: 5px;
-            background-color: #2d4739;
-            color: #fdfcf7;
-            cursor: pointer;
-            margin-left: 8px;
-        }
-
-        .search-box button:hover {
-            background-color: #1f3128;
-        }
-
-        #store-list {
-            list-style: none;
-            padding: 0;
-            margin-top: 30px;
-        }
-
-        #store-list li {
-            margin-bottom: 12px;
-            padding: 10px;
-            border-bottom: 1px solid #ccc;
-            cursor: pointer;
-        }
-
-        #store-list li:hover {
-            background-color: #f0f0f0;
-        }
-
-        footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: #2d4739;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            margin-top: 40px;
-            box-sizing: border-box;
-        }
+    
     </style>
 </head>
 
@@ -175,40 +45,8 @@
         <br><br><br><br>
         <div id="map"></div>
 
-        <script>
-            let map, service, markers = [];
-            function initMap() {
-                map = new google.maps.Map(document.getElementById('map'), { center: { lat: 37.5665, lng: 126.9780 }, zoom: 13 });
-                service = new google.maps.places.PlacesService(map);
-            }
-
-            document.getElementById('address-input').addEventListener('keydown', (e) => {
-                if (e.key === 'Enter') document.getElementById('search-btn').click();
-            });
-
-
-            function clearMarkers() { markers.forEach(m => m.setMap(null)); markers = []; }
-            document.getElementById('search-btn').addEventListener('click', () => {
-                const q = document.getElementById('address-input').value;
-                clearMarkers();
-                service.textSearch({ query: q + ' 카페' }, (res, status) => {
-                    if (status === google.maps.places.PlacesServiceStatus.OK) displayStores(res);
-                });
-            });
-            function displayStores(places) {
-                const bounds = new google.maps.LatLngBounds();
-                const listEl = document.getElementById('store-list'); listEl.innerHTML = '';
-                places.forEach(p => {
-                    const m = new google.maps.Marker({ map, position: p.geometry.location }); markers.push(m);
-                    bounds.extend(m.getPosition());
-                    const li = document.createElement('li');
-                    li.innerHTML = `<strong>${p.name}</strong><br>${p.formatted_address}`;
-                    li.onclick = () => map.panTo(m.getPosition());
-                    listEl.appendChild(li);
-                });
-                map.fitBounds(bounds);
-            }
-            window.initMap = initMap;
+        <script src="./findstore.js">
+         
         </script>
         <ul id="store-list" style="margin-left: 600px; margin-top: 20px;">
 
